@@ -34,22 +34,14 @@ resource "aws_launch_template" "fortunetemplate" {
   disable_api_stop        = true
   disable_api_termination = true
 
-  ebs_optimized = true
-
   iam_instance_profile {
     name = "FortuneWebServerDynamodbRole"
   }
 
   image_id = "ami-00eb698aea3e796bc"
 
-  instance_initiated_shutdown_behavior = "terminate"
-
   instance_type = "t2.micro"
-
-  placement {
-    availability_zone = "eu-central-1"
-  }
-
+  
   vpc_security_group_ids = ["sg-084412ea7d4375dde", "sg-0270cf20e5d2b1fd8"]
 
   tag_specifications {
