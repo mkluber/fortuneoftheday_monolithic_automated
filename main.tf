@@ -28,6 +28,14 @@ provider "aws" {
 #   }
 # }
 
+
+
+
+
+
+
+
+
 resource "aws_launch_template" "fortunetemplate" {
   name = "fortunetemplate"
 
@@ -50,5 +58,47 @@ resource "aws_launch_template" "fortunetemplate" {
     tags = {
       Name = "test"
     }
+  }
+}
+
+
+
+
+
+
+
+
+resource "aws_autoscaling_group" "fortuneautogroup" {
+  name                      = "fortuneautogroup"
+  max_size                  = 3
+  min_size                  = 1
+  health_check_grace_period = 300
+  health_check_type         = "EC2"
+  desired_capacity          = 2
+  availability_zones = ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
+
+  launch_template {
+    name = "fortunetemplate"
+  }
+
+  instance_maintenance_policy {
+    min_healthy_percentage = 90
+    max_healthy_percentage = 120
+  }
+
+  tag {
+    key                 = "foo"
+    value               = "bar"
+    propagate_at_launch = true
+  }
+
+  timeouts {
+    delete = "15m"
+  }
+
+  tag {
+    key                 = "lorem"
+    value               = "ipsum"
+    propagate_at_launch = false
   }
 }
