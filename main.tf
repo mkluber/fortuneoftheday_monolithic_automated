@@ -29,6 +29,47 @@ provider "aws" {
 # }
 
 
+resource "aws_lb" "fortunelb" {
+  name               = "fortunelb"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = ["sg-084412ea7d4375dde"]
+  subnets            = ["subnet-06cdce1d8e6b71368", "subnet-02449290dd55a46b1", "subnet-06d17cf8cdfc78514"]
+
+  enable_deletion_protection = true
+
+  tags = {
+    Environment = "production"
+  }
+}
+
+
+
+
+
+
+
+
+resource "aws_lb_target_group" "fortunetargetgroup" {
+  name     = "fortunetargetgroup"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = "vpc-0a2da1530815bf09c"
+}
+
+
+resource "aws_lb_listener" "front_end" {
+  load_balancer_arn = aws_lb.fortunelb.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.fortunelb.arn
+  }
+}
+
+
 
 
 
