@@ -41,7 +41,7 @@ resource "aws_launch_template" "fortunetemplate" {
   image_id = "ami-00eb698aea3e796bc"
 
   instance_type = "t2.micro"
-  
+
   vpc_security_group_ids = ["sg-084412ea7d4375dde", "sg-0270cf20e5d2b1fd8"]
 
   tag_specifications {
