@@ -2,39 +2,12 @@ provider "aws" {
   region = var.region
 }
 
-# data "aws_ami" "fortuneami" {
-
-#   most_recent = true
-#   owners = ["self"]
-
-#   filter {
-#     name   = "name"
-#     values = ["FortuneWebServerImage2"]
-#   }
-
-#   filter {
-#     name   = "virtualization-type"
-#     values = ["hvm"]
-#   }
-
-# }
-
-# resource "aws_instance" "fortunevm" {
-#   ami           = data.aws_ami.fortuneami.id
-#   instance_type = var.instance_type
-
-#   tags = {
-#     Name = var.instance_name
-#   }
-# }
-
-
 resource "aws_lb" "fortunelb" {
   name               = "fortunelb"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = ["sg-084412ea7d4375dde"]
-  subnets            = ["subnet-06cdce1d8e6b71368", "subnet-02449290dd55a46b1", "subnet-06d17cf8cdfc78514"]
+  security_groups    = var.lb_security_groups
+  subnets            = var.lb_subnets
 
   tags = {
     Environment = "production"
@@ -48,7 +21,7 @@ resource "aws_lb_target_group" "fortunetargetgroup" {
   target_type = "instance"
   port        = 80
   protocol    = "HTTP"
-  vpc_id      = "vpc-0a2da1530815bf09c"
+  vpc_id      = var.lb_target_group_vpc_id
 }
 
 resource "aws_lb_listener" "fortunelistener" {
@@ -65,11 +38,6 @@ resource "aws_lb_listener" "fortunelistener" {
 
 
 
-
-
-
-
-
 resource "aws_launch_template" "fortunetemplate" {
   name = "fortunetemplate"
 
@@ -77,25 +45,23 @@ resource "aws_launch_template" "fortunetemplate" {
   disable_api_termination = true
 
   iam_instance_profile {
-    name = "FortuneWebServerDynamodbRole"
+    name = var.instance_profile_name
   }
 
-  image_id = "ami-00eb698aea3e796bc"
+  image_id = var.ami_id
 
-  instance_type = "t2.micro"
+  instance_type = var.instance_type
 
-  vpc_security_group_ids = ["sg-084412ea7d4375dde", "sg-0270cf20e5d2b1fd8"]
+  vpc_security_group_ids = var.launch_template_vpc_sg_ids
 
   tag_specifications {
     resource_type = "instance"
 
     tags = {
-      Name = "test"
+      Name = var.instance_name
     }
   }
 }
-
-
 
 
 
@@ -109,7 +75,7 @@ resource "aws_autoscaling_group" "fortuneautogroup" {
   health_check_grace_period = 300
   health_check_type         = "EC2"
   desired_capacity          = 2
-  availability_zones = ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
+  availability_zones = var.autoscaling_group_availability_zones
 
   launch_template {
     name = "fortunetemplate"
