@@ -115,6 +115,8 @@ resource "aws_autoscaling_group" "fortuneautogroup" {
     name = "fortunetemplate"
   }
 
+  target_group_arns = [aws_lb_target_group.fortunetargetgroup.arn]
+
   instance_maintenance_policy {
     min_healthy_percentage = 90
     max_healthy_percentage = 120
