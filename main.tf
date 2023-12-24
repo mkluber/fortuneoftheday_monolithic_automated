@@ -36,8 +36,6 @@ resource "aws_lb" "fortunelb" {
   security_groups    = ["sg-084412ea7d4375dde"]
   subnets            = ["subnet-06cdce1d8e6b71368", "subnet-02449290dd55a46b1", "subnet-06d17cf8cdfc78514"]
 
-  enable_deletion_protection = true
-
   tags = {
     Environment = "production"
   }
