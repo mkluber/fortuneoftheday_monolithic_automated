@@ -47,7 +47,7 @@ resource "aws_lb_target_group" "fortunetargetgroup" {
   name        = "fortunetargetgroup"
   target_type = "alb"
   port        = 80
-  protocol    = "TCP"
+  protocol    = "HTTP"
   vpc_id      = "vpc-0a2da1530815bf09c"
 }
 
