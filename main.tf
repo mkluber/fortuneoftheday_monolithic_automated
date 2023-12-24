@@ -45,20 +45,15 @@ resource "aws_lb" "fortunelb" {
 
 
 
-
-
-
-
-
 resource "aws_lb_target_group" "fortunetargetgroup" {
-  name     = "fortunetargetgroup"
-  port     = 80
-  protocol = "HTTP"
-  vpc_id   = "vpc-0a2da1530815bf09c"
+  name        = "fortunetargetgroup"
+  target_type = "alb"
+  port        = 80
+  protocol    = "TCP"
+  vpc_id      = "vpc-0a2da1530815bf09c"
 }
 
-
-resource "aws_lb_listener" "front_end" {
+resource "aws_lb_listener" "fortunelistener" {
   load_balancer_arn = aws_lb.fortunelb.arn
   port              = "80"
   protocol          = "HTTP"
