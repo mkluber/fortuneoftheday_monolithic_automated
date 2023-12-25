@@ -11,7 +11,6 @@ module "vpc" {
   azs             = ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
   public_subnets = ["137.137.1.0/24", "137.137.2.0/24", "137.137.3.0/24"]
   create_igw = "true"
-  default_route_table_name = "fortuneroute"
 }
 
 # module "autoscaling" {
