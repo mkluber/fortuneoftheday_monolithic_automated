@@ -51,6 +51,7 @@ module "autoscaling" {
 
   image_id          = "ami-00eb698aea3e796bc"
   instance_type     = "t2.micro"
+  security_groups   = ["sg-084412ea7d4375dde"]
   # ebs_optimized     = true
   # enable_monitoring = true
 
