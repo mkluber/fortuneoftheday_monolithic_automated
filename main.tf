@@ -14,6 +14,7 @@ module "autoscaling" {
   wait_for_capacity_timeout = 0
   health_check_type         = "EC2"
   vpc_zone_identifier       = ["subnet-06cdce1d8e6b71368", "subnet-02449290dd55a46b1", "subnet-06d17cf8cdfc78514"]
+  target_group_arns         = [module.alb.target_groups.fortunegroup.arn]
 
   initial_lifecycle_hooks = [
     {
