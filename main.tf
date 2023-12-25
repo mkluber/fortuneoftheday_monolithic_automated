@@ -94,7 +94,7 @@ module "alb" {
       protocol         = "HTTP"
       port             = 80
       target_type      = "instance"
-      target_id        = "fortunegroup"
+      create_attachment = "false"
     }
   }
 }
