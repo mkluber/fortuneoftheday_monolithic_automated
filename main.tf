@@ -119,7 +119,6 @@
 
 module "autoscaling" {
   source  = "terraform-aws-modules/autoscaling/aws"
-  version = "7.3.1"
 
   # Autoscaling group
   name = "fortunegroup"
@@ -295,7 +294,6 @@ module "autoscaling" {
 
 module "alb" {
   source = "terraform-aws-modules/alb/aws"
-  version = "9.4.0"
 
   name    = "fortunelb"
   # vpc_id  = "vpc-abcde012"
