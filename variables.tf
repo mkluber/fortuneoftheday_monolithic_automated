@@ -1,7 +1,7 @@
-# variable "region" {
-#   description = "AWS region"
-#   default     = "eu-central-1"
-# }
+variable "region" {
+  description = "AWS region"
+  default     = "eu-central-1"
+}
 
 # variable "instance_type" {
 #   description = "Type of EC2 instance to provision"
