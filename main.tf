@@ -224,14 +224,14 @@ listeners = {
     # }
 }
 
-  target_groups = {
-    fortunetarget = {
-      name = "fortunetarget"
-      protocol         = "HTTP"
-      port             = 80
-      target_type      = "instance"
-    }
+target_groups = {
+  fortunetarget = {
+    name = "fortunetarget"
+    protocol         = "HTTP"
+    port             = 80
+    target_type      = "instance"
   }
+}
 
   # tags = {
   #   Environment = "Development"
