@@ -25,7 +25,7 @@ module "autoscaling" {
   desired_capacity          = 2
   wait_for_capacity_timeout = 0
   health_check_type         = "EC2"
-  vpc_zone_identifier       = [module.vpc.public_subnets]
+  vpc_zone_identifier       = module.vpc.public_subnets ### CONTINUE FROM HERE ###
 
   initial_lifecycle_hooks = [
     {
