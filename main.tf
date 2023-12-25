@@ -296,7 +296,7 @@ module "alb" {
   source = "terraform-aws-modules/alb/aws"
 
   name    = "fortunelb"
-  # vpc_id  = "vpc-abcde012"
+  vpc_id  = "vpc-0a2da1530815bf09c"
   security_groups = ["sg-084412ea7d4375dde"]
   subnets = ["subnet-06cdce1d8e6b71368", "subnet-02449290dd55a46b1", "subnet-06d17cf8cdfc78514"]
 
