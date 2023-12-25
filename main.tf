@@ -230,7 +230,7 @@ target_groups = {
     protocol         = "HTTP"
     port             = 80
     target_type      = "instance"
-    target_id        = "fortunelb"
+    target_id        = "fortunegroup"
   }
 }
 
