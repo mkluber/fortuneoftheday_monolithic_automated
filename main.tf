@@ -5,7 +5,7 @@ provider "aws" {
 module "iam_iam-policy" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
 
-  name        = "fortunepolicy"
+  name        = "fortunepolicy_automated"
   path        = "/"
   description = "Policy for the fortunes"
 
@@ -44,7 +44,7 @@ module "iam_iam-assumable-role" {
 
   create_instance_profile = true
 
-  role_name = "fortunerole"
+  role_name = "fortunerole_automated"
   role_requires_mfa = false
 
   custom_role_policy_arns = module.iam_iam-policy.arn
@@ -122,7 +122,7 @@ module "autoscaling" {
 
   image_id          = var.image_id
   instance_type     = var.instance_type
-  security_groups   = module.security-group_http-80.security_group_id
+  security_groups   = [module.security-group_http-80.security_group_id]
 
   # IAM role & instance profile
   create_iam_instance_profile = false
@@ -145,7 +145,7 @@ module "alb" {
   name    = "fortunelb"
   vpc_id  = module.vpc.vpc_id
   create_security_group = "false"
-  security_groups = module.security-group_http-80.security_group_id
+  security_groups = [module.security-group_http-80.security_group_id]
   subnets = module.vpc.public_subnets
   enable_deletion_protection = "false"
 
