@@ -55,7 +55,7 @@ module "dynamodb-table" {
   source  = "terraform-aws-modules/dynamodb-table/aws"
 
 
-  name                        = "fortunetable"
+  name                        = "Fortunes"
   hash_key                    = "FortuneName"
   range_key                   = "FortuneOrigin"
   table_class                 = "STANDARD"
