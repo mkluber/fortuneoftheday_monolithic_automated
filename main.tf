@@ -118,7 +118,7 @@ module "autoscaling" {
   launch_template_name        = "fortunetemplate"
   launch_template_description = "Launch template example"
   update_default_version      = true
-  target_group_arns         = module.alb.target_groups["fortunetarget"].arn
+  target_group_arns         = [module.alb.target_groups["fortunetarget"].arn]
 
   image_id          = var.image_id
   instance_type     = var.instance_type
