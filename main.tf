@@ -24,7 +24,7 @@ module "iam_iam-policy" {
               "dynamodb:UpdateItem"
           ],
           "Resource": [
-              "arn:aws:dynamodb:eu-central-1:385071190480:table/Fortunes"
+             "${module.dynamodb-table.dynamodb_table_arn}"
           ]
       }
   ]
@@ -49,6 +49,33 @@ module "iam_iam-assumable-role" {
   role_requires_mfa = false
 
   custom_role_policy_arns = [module.iam_iam-policy.arn]
+}
+
+module "dynamodb-table" {
+  source  = "terraform-aws-modules/dynamodb-table/aws"
+
+
+  name                        = "fortunetable"
+  hash_key                    = "FortuneName"
+  range_key                   = "FortuneOrigin"
+  table_class                 = "STANDARD"
+  deletion_protection_enabled = false
+
+  attributes = [
+    {
+      name = "FortuneName"
+      type = "S"
+    },
+    {
+      name = "FortuneOrigin"
+      type = "S"
+    }
+  ]
+
+  tags = {
+    Terraform   = "true"
+    Environment = "staging"
+  }
 }
 
 
