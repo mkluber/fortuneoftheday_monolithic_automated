@@ -43,7 +43,7 @@ module "iam_iam-assumable-role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
 
   create_instance_profile = true
-
+  create_role = true
   role_name = "fortunerole_automated"
   role_requires_mfa = false
 
