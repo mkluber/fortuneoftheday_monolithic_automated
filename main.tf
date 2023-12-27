@@ -89,6 +89,7 @@ module "vpc" {
   public_subnets = var.public_subnets
   create_igw = "true"
   default_route_table_name = "fortuneroute"
+  map_public_ip_on_launch = "true"
 }
 
 module "security-group_http-80" {
