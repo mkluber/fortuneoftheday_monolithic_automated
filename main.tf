@@ -47,7 +47,7 @@ module "iam_iam-assumable-role" {
   role_name = "fortunerole_automated"
   role_requires_mfa = false
 
-  custom_role_policy_arns = module.iam_iam-policy.arn
+  custom_role_policy_arns = [module.iam_iam-policy.arn]
 }
 
 
